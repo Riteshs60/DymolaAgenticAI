@@ -33,10 +33,14 @@ def _win():
 
 def discover_dymola(explicit: Optional[str] = None) -> Tuple[Path, Path]:
     """Return (install_root, exe_path)."""
+    def _root_from_exe(exe: Path) -> Path:
+        parent = exe.parent.name.lower()
+        return exe.parent.parent if parent in ("bin", "bin64", "bin32") else exe.parent
+
     if explicit:
         p = Path(explicit)
         if p.is_file():
-            return p.parent.parent if p.parent.name.lower() == "bin" else p.parent, p
+            return _root_from_exe(p), p
         exe = _exe_in_root(p)
         if exe:
             return p, exe
@@ -45,8 +49,7 @@ def discover_dymola(explicit: Optional[str] = None) -> Tuple[Path, Path]:
     env_exe = os.environ.get("DYMOLA_EXE")
     if env_exe and Path(env_exe).is_file():
         exe = Path(env_exe)
-        root = exe.parent.parent if exe.parent.name.lower() == "bin" else exe.parent
-        return root, exe
+        return _root_from_exe(exe), exe
 
     env_home = os.environ.get("DYMOLA_HOME") or os.environ.get("DYMOLAINSTALL")
     if env_home:
@@ -85,7 +88,8 @@ def discover_dymola(explicit: Optional[str] = None) -> Tuple[Path, Path]:
         found = shutil.which(name)
         if found:
             exe = Path(found)
-            root = exe.parent.parent if exe.parent.name.lower() == "bin" else exe.parent
+            parent = exe.parent.name.lower()
+            root = exe.parent.parent if parent in ("bin", "bin64", "bin32") else exe.parent
             return root, exe
 
     raise FileNotFoundError(
@@ -95,7 +99,8 @@ def discover_dymola(explicit: Optional[str] = None) -> Tuple[Path, Path]:
 
 def _exe_in_root(root: Path) -> Optional[Path]:
     names = ("Dymola.exe", "dymola.exe", "Dymola", "dymola")
-    for sub in ("bin", "Bin", ""):
+    # Prefer 64-bit folders first — common on modern Windows installs.
+    for sub in ("bin64", "Bin64", "bin", "Bin", "bin32", "Bin32", ""):
         base = root / sub if sub else root
         for n in names:
             p = base / n

@@ -3,6 +3,10 @@
 These scripts are shared by every skill in this repo. Keep `scripts/` as a
 **sibling** of the skill folders (do not install skills without it).
 
+**New here?** Start with the human walkthrough: [`../USER_GUIDE.md`](../USER_GUIDE.md).  
+Agent setup: [`../InstallationGuide.md`](../InstallationGuide.md).  
+Future work: [`../ROADMAP.md`](../ROADMAP.md).
+
 Override the scripts location with `$DYMOLA_SKILLS_SCRIPTS` if needed.
 
 ## Quick map
