@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Managed skill cache (user-local; never commit)
+.dymola-skills/
+
+# Dymola / simulation artifacts
+**/_dymola_*/
+**/dslog.txt
+**/dsin.txt
+**/dsu.txt
+**/dsfinal.txt
+**/dsres.mat
+**/dymosim.exe
+**/dymosim
+**/dsmodel.c
+**/dsmodel.h
+**/build.log
+**/*.mat
+**/*.mof
+**/*.exe~
+**/status
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

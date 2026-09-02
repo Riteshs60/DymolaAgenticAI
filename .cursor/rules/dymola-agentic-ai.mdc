@@ -1,0 +1,13 @@
+# Dymola Agentic AI — Cursor
+
+When the user works with Dymola / Modelica / dymosim / encrypted libraries in this
+repo, read the matching `*/SKILL.md` and run tools under `scripts/`.
+
+Priority skills:
+- Architecture → `dymola-model-architecture/SKILL.md`
+- Encrypted params → `expose-encrypted-params/SKILL.md`
+- Tune / sweep → `tune-parameters/SKILL.md`
+- Inspect binary/C → `inspect-dymosim/SKILL.md`
+- Validate / simulate / diagnose → respective `*-dymola/SKILL.md`
+
+Never attempt to decrypt encrypted Modelica libraries. Use `dsin.txt` exposed parameters only.

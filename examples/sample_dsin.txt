@@ -1,0 +1,10 @@
+# initialConditions
+# k Gain
+1.0
+# T Time constant
+0.5
+# other.nested
+3.14
+k = 1.0 # Gain
+T = 0.5 # Time constant
+pump.N = 1200 # Speed
